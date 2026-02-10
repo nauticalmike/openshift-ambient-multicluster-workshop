@@ -590,7 +590,7 @@ curl -H "Host: bookinfo.glootest.com" http://$SVC/productpage
 Tail logs of ztunnel on `cluster2` in a new terminal to watch logs
 
 ```bash
-kubectl logs ds/ztunnel -n kube-system --context $CLUSTER2 -f
+kubectl logs ds/ztunnel -n istio-system --context $CLUSTER2 -f
 ```
 
 You should see traffic going to cluster2
@@ -608,7 +608,7 @@ In the ztunnel logs of cluster2 we should see that traffic is no longer routing 
 Tail logs of ztunnel on `cluster1` in a new terminal to watch logs
 
 ```bash
-kubectl logs ds/ztunnel -n kube-system --context $CLUSTER1 -f
+kubectl logs ds/ztunnel -n istio-system --context $CLUSTER1 -f
 ```
 
 If you retry the curl command you should now see traffic going back to cluster1.
