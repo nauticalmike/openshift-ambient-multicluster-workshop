@@ -565,12 +565,14 @@ EOF
 
 Assuming that you have DNS properly configured to the LoadBalancer IP address of the ingress gateway, you should now be able to access the application at http://bookinfo.glootest.com/productpage
 
-Otherwise you can curl it with a host header
+Otherwise, you can curl it with a host header
 
 ```bash
 SVC=$(kubectl -n istio-system get svc http-istio --context $CLUSTER1 --no-headers | awk '{ print $4 }')
 curl -H "Host: bookinfo.glootest.com" http://$SVC/productpage
 ```
+
+After doing several of these requests you should be able to see they are being distributed between cluster 1 and 2.
 
 ## Failover Bookinfo on cluster1
 
@@ -580,7 +582,7 @@ Scale down productpage-v1 in the `bookinfo-frontends` namespace on cluster1
 kubectl scale deploy/productpage-v1 -n bookinfo-frontends --replicas 0 --context $CLUSTER1
 ```
 
-Retry the curl command, you should still have success accessing the bookinfo application
+Retry the curl command, you should still have success accessing the `bookinfo` application
 
 ```bash
 SVC=$(kubectl -n istio-system get svc http-istio --context $CLUSTER1 --no-headers | awk '{ print $4 }')
@@ -593,7 +595,7 @@ Tail logs of ztunnel on `cluster2` in a new terminal to watch logs
 kubectl logs ds/ztunnel -n istio-system --context $CLUSTER2 -f
 ```
 
-You should see traffic going to cluster2
+You should see traffic going to cluster2 only.
 
 ## Restore Bookinfo on cluster1
 
@@ -611,4 +613,4 @@ Tail logs of ztunnel on `cluster1` in a new terminal to watch logs
 kubectl logs ds/ztunnel -n istio-system --context $CLUSTER1 -f
 ```
 
-If you retry the curl command you should now see traffic going back to cluster1.
+If you retry the curl command you should now see traffic going back to being distributed between cluster 1 and 2.
