@@ -29,7 +29,7 @@ In this workshop, you will set up Istio Ambient in a multi-cluster OpenShift env
 
 ## Validated on
 - OpenShift 4.18.21
-- Istio 1.28.3-patch0-solo
+- Istio 1.28.4-solo
 - Solo Enterprise for Istio 2.11
 
 ## Prereqs
@@ -48,7 +48,7 @@ export CLUSTER1=openshift_cluster_one # UPDATE THIS
 export CLUSTER2=openshift_cluster_two # UPDATE THIS
 export GLOO_MESH_LICENSE_KEY=<update>  # UPDATE THIS
 
-export ISTIO_VERSION=1.28.3-patch0
+export ISTIO_VERSION=1.28.4-solo
 export REPO_KEY=594e990587b9
 export ISTIO_IMAGE=${ISTIO_VERSION}-solo
 export REPO=us-docker.pkg.dev/gloo-mesh/istio-${REPO_KEY}
